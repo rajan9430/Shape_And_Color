@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Shape and Color</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .shape-container {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .shape {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        .circle { border-radius: 50%; }
+        .square { }
+        .rectangle { width: 120px; height: 80px; }
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 100px solid red;
+            background: none;
+        }
+        .diamond {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            transform: rotate(45deg);
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="shape-container">
+        <div class="shape square" id="shape"></div>
+    </div>
+    <div class="buttons">
+        <button onclick="changeColor()">Change Color</button>
+        <button onclick="changeShape()">Change Shape</button>
+    </div>
+
+    <script>
+        const colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink", "brown", "cyan", "lime"];
+        const shapes = ["square", "circle", "rectangle", "triangle", "diamond"];
+        
+        function changeColor() {
+            let randomColor = colors[Math.floor(Math.random() * colors.length)];
+            let shape = document.getElementById("shape");
+            shape.style.backgroundColor = randomColor;
+            if (shape.classList.contains("triangle")) {
+                shape.style.borderBottomColor = randomColor;
+            }
+        }
+
+        function changeShape() {
+            let shape = document.getElementById("shape");
+            let newShape = shapes[Math.floor(Math.random() * shapes.length)];
+            shape.className = "shape " + newShape;
+            if (newShape === "triangle") {
+                shape.style.backgroundColor = "transparent";
+            } else {
+                shape.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            }
+        }
+    </script>
+</body>
+</html>
